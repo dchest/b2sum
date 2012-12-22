@@ -17,6 +17,7 @@ var (
 )
 
 func calcSum(f *os.File, h hash.Hash) (sum []byte, err error) {
+	h.Reset()
 	_, err = io.Copy(h, f)
 	sum = h.Sum(nil)
 	return
