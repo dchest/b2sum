@@ -9,12 +9,32 @@ import (
 	"os"
 
 	"github.com/dchest/blake2b"
+	"github.com/dchest/blake2s"
 )
 
 var (
-	algoFlag = flag.String("a", "blake2b", "hash algorithm")
-	sizeFlag = flag.Int("s", 64, "digest size in bytes")
+	algoFlag = flag.String("a", "blake2b", "hash algorithm (blake2b, blake2s)")
+	sizeFlag = flag.Int("s", 0, "digest size in bytes (0 = default)")
 )
+
+type hashDesc struct {
+	name    string
+	maxSize int
+	maker   func(size uint8) (hash.Hash, error)
+}
+
+var algorithms = map[string]hashDesc{
+	"blake2b": {
+		"BLAKE2b",
+		blake2b.Size,
+		func(size uint8) (hash.Hash, error) { return blake2b.New(&blake2b.Config{Size: size}) },
+	},
+	"blake2s": {
+		"BLAKE2s",
+		blake2s.Size,
+		func(size uint8) (hash.Hash, error) { return blake2s.New(&blake2s.Config{Size: size}) },
+	},
+}
 
 func calcSum(f *os.File, h hash.Hash) (sum []byte, err error) {
 	h.Reset()
@@ -26,19 +46,22 @@ func calcSum(f *os.File, h hash.Hash) (sum []byte, err error) {
 func main() {
 	flag.Parse()
 
-	if *algoFlag != "blake2b" {
+	algo, ok := algorithms[*algoFlag]
+	if !ok {
 		flag.Usage()
-		fmt.Fprintf(os.Stderr, `only "blake2b" algorithm is currently supported`)
+		fmt.Fprintf(os.Stderr, `unsupported algorithm: %s`, algoFlag)
 		os.Exit(1)
 	}
-
-	if *sizeFlag > blake2b.Size {
+	if *sizeFlag == 0 {
+		*sizeFlag = algo.maxSize
+	} else if *sizeFlag > algo.maxSize {
 		fmt.Fprintf(os.Stderr, "error: size too large")
 		os.Exit(1)
 	}
-	h, err := blake2b.New(&blake2b.Config{Size: uint8(*sizeFlag)})
+
+	h, err := algo.maker(uint8(*sizeFlag))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error %s", err)
+		fmt.Fprintf(os.Stderr, "error: %s", err)
 		os.Exit(1)
 	}
 
@@ -68,7 +91,7 @@ func main() {
 			exitNo = 1
 			continue
 		}
-		fmt.Printf("BLAKE2b-%d (%s) = %x\n", h.Size(), filename, sum)
+		fmt.Printf("%s-%d (%s) = %x\n", algo.name, h.Size(), filename, sum)
 	}
 	os.Exit(exitNo)
 }
