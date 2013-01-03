@@ -13,8 +13,7 @@ From source, if you have Go installed:
 	$ go get github.com/dchest/b2sum
 
 Binaries for OS X, Linux, and Windows are available from
-
-       https://www.codingrobots.org/b2sum/
+<https://www.codingrobots.org/b2sum/>
 
 Usage
 -----
