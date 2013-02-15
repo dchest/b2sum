@@ -8,12 +8,13 @@ Note: The original utility available from https://blake2.net is faster.
 Installation
 ------------
 
-From source, if you have Go installed:
+Download binary for your platform by clicking on the [Download](download) item
+in the top menu, unzip it and put into your PATH.
+
+To install from source, if you have Go installed:
 
 	$ go get github.com/dchest/b2sum
 
-Binaries for OS X, Linux, and Windows are available from
-<https://www.codingrobots.org/b2sum/>
 
 Usage
 -----
