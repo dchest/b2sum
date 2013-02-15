@@ -8,14 +8,15 @@ Note: The original utility available from https://blake2.net is faster.
 Installation
 ------------
 
-Download binary for your platform by clicking on the [Downloads](b2sum/downloads) item
-in the top menu, unzip it and put into your PATH.
+Download binary for your platform by clicking on the
+[Downloads](https://bitbucket.org/dchest/b2sum/downloads) item in the top menu,
+unzip it and put into your PATH.
 
 Available platforms: OS X (darwin), Linux, FreeBSD, Windows.
 
 To install from source, if you have Go installed:
 
-	$ go get github.com/dchest/b2sum
+	$ go get bitbucket.org/dchest/b2sum
 
 
 Usage
