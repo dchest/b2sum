@@ -3,7 +3,7 @@ B2SUM
 
 Utility to calculate BLAKE2 checksums written in Go.
 
-Note: The original utility available from https://blake2.net is faster.
+Note: The original utility available from <https://blake2.net> is faster.
 
 Installation
 ------------
@@ -54,5 +54,5 @@ Packages
 
 Pure Go implementations of BLAKE2 to use in your applicaitons:
 
-  * BLAKE2b - https://github.com/dchest/blake2b
-  * BLAKE2s - https://github.com/dchest/blake2s
+  * BLAKE2b - <https://github.com/dchest/blake2b>
+  * BLAKE2s - <https://github.com/dchest/blake2s>
