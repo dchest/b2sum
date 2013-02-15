@@ -8,7 +8,7 @@ Note: The original utility available from https://blake2.net is faster.
 Installation
 ------------
 
-Download binary for your platform by clicking on the [Download](download) item
+Download binary for your platform by clicking on the [Download](b2sum/download) item
 in the top menu, unzip it and put into your PATH.
 
 To install from source, if you have Go installed:
