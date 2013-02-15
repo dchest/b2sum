@@ -11,6 +11,8 @@ Installation
 Download binary for your platform by clicking on the [Downloads](b2sum/downloads) item
 in the top menu, unzip it and put into your PATH.
 
+Available platforms: OS X (darwin), Linux, FreeBSD, Windows.
+
 To install from source, if you have Go installed:
 
 	$ go get github.com/dchest/b2sum
