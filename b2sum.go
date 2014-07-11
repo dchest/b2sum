@@ -49,7 +49,7 @@ func main() {
 	algo, ok := algorithms[*algoFlag]
 	if !ok {
 		flag.Usage()
-		fmt.Fprintf(os.Stderr, `unsupported algorithm: %s`, algoFlag)
+		fmt.Fprintf(os.Stderr, `unsupported algorithm: %s`, *algoFlag)
 		os.Exit(1)
 	}
 	if *sizeFlag == 0 {
